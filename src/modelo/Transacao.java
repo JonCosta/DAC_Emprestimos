@@ -1,15 +1,18 @@
 package modelo;
 
-public class Conta {
+public class Transacao {
 
-	private String idcc, situacao, numero ;
+	private int idcc;
+	private String situacao, numero ;
 	private float saldo, limite ;
 	
-	public Conta(){
+	public Transacao(){
 		
 	}//Fecha Conta()
 	
-	
+	//public Transacao() {
+		
+	//}
 	//Função de Depósito
 	public boolean depositarFundos(float valor){
 		
@@ -36,7 +39,7 @@ public class Conta {
 	}//Fecha sacarFundos
 	
 	//Função para transferir fundos de uma conta a outra
-	public boolean transferir (Conta c, float valor){
+	public boolean transferir (Transacao c, float valor){
 		
 		if(valor > this.saldo){ //Verifica se há saldo o suficiente para fazer a transferência
 			return false ;
@@ -56,11 +59,11 @@ public class Conta {
 	
 	
 	/*FUNÇÕES GETTER E SETTER*/
-	public String getIdcc() {
+	public int getIdcc() {
 		return idcc;
 	}
 	
-	public void setIdcc(String idcc) {
+	public void setIdcc(int idcc) {
 		this.idcc = idcc;
 	}
 	

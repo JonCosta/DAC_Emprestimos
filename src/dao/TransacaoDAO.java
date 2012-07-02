@@ -9,11 +9,11 @@ import com.mysql.jdbc.exceptions.* ;
 
 import jdbc.ConnectionFactory;
 
-public class ContaDAO {
+public class TransacaoDAO {
 
 private Connection connection = null ;
 	
-	public ContaDAO(){
+	public TransacaoDAO(){
 		
 		try{
 			this.connection = new ConnectionFactory().getConnection() ;
