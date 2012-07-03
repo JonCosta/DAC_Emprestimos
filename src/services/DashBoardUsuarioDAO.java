@@ -8,5 +8,5 @@
 package services;
 
 public interface DashBoardUsuarioDAO extends java.rmi.Remote {
-    public int buscarUsuario(modelo.DashBoardUsuario u) throws java.rmi.RemoteException;
+    public int buscarUsuario(services.DashBoardUsuario u) throws java.rmi.RemoteException;
 }

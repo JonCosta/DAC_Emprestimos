@@ -1,5 +1,5 @@
 /**
- * DashBoardUsuarioDAOSoapBindingStub.java
+ * DashBoardContaDAOSoapBindingStub.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
@@ -7,7 +7,7 @@
 
 package services;
 
-public class DashBoardUsuarioDAOSoapBindingStub extends org.apache.axis.client.Stub implements services.DashBoardUsuarioDAO {
+public class DashBoardContaDAOSoapBindingStub extends org.apache.axis.client.Stub implements services.DashBoardContaDAO {
     private java.util.Vector cachedSerClasses = new java.util.Vector();
     private java.util.Vector cachedSerQNames = new java.util.Vector();
     private java.util.Vector cachedSerFactories = new java.util.Vector();
@@ -24,28 +24,28 @@ public class DashBoardUsuarioDAOSoapBindingStub extends org.apache.axis.client.S
         org.apache.axis.description.OperationDesc oper;
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
-        oper.setName("buscarUsuario");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://dao", "u"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://modelo", "DashBoardUsuario"), services.DashBoardUsuario.class, false, false);
+        oper.setName("buscarContaUsuario");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://dao", "idusuario"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
         oper.addParameter(param);
-        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
-        oper.setReturnClass(int.class);
-        oper.setReturnQName(new javax.xml.namespace.QName("http://dao", "buscarUsuarioReturn"));
+        oper.setReturnType(new javax.xml.namespace.QName("http://modelo", "Conta"));
+        oper.setReturnClass(services.DashBoardConta.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("http://dao", "buscarContaUsuarioReturn"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[0] = oper;
 
     }
 
-    public DashBoardUsuarioDAOSoapBindingStub() throws org.apache.axis.AxisFault {
+    public DashBoardContaDAOSoapBindingStub() throws org.apache.axis.AxisFault {
          this(null);
     }
 
-    public DashBoardUsuarioDAOSoapBindingStub(java.net.URL endpointURL, javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
+    public DashBoardContaDAOSoapBindingStub(java.net.URL endpointURL, javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
          this(service);
          super.cachedEndpoint = endpointURL;
     }
 
-    public DashBoardUsuarioDAOSoapBindingStub(javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
+    public DashBoardContaDAOSoapBindingStub(javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
         if (service == null) {
             super.service = new org.apache.axis.client.Service();
         } else {
@@ -65,9 +65,9 @@ public class DashBoardUsuarioDAOSoapBindingStub extends org.apache.axis.client.S
             java.lang.Class simpledf = org.apache.axis.encoding.ser.SimpleDeserializerFactory.class;
             java.lang.Class simplelistsf = org.apache.axis.encoding.ser.SimpleListSerializerFactory.class;
             java.lang.Class simplelistdf = org.apache.axis.encoding.ser.SimpleListDeserializerFactory.class;
-            qName = new javax.xml.namespace.QName("http://modelo", "DashBoardUsuario");
+            qName = new javax.xml.namespace.QName("http://modelo", "Conta");
             cachedSerQNames.add(qName);
-            cls = services.DashBoardUsuario.class;
+            cls = services.DashBoardConta.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
@@ -138,7 +138,7 @@ public class DashBoardUsuarioDAOSoapBindingStub extends org.apache.axis.client.S
         }
     }
 
-    public int buscarUsuario(services.DashBoardUsuario u) throws java.rmi.RemoteException {
+    public services.DashBoardConta buscarContaUsuario(int idusuario) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -150,11 +150,11 @@ public class DashBoardUsuarioDAOSoapBindingStub extends org.apache.axis.client.S
         _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
         _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
-        _call.setOperationName(new javax.xml.namespace.QName("http://dao", "buscarUsuario"));
+        _call.setOperationName(new javax.xml.namespace.QName("http://dao", "buscarContaUsuario"));
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {u});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {new java.lang.Integer(idusuario)});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
@@ -162,9 +162,9 @@ public class DashBoardUsuarioDAOSoapBindingStub extends org.apache.axis.client.S
         else {
             extractAttachments(_call);
             try {
-                return ((java.lang.Integer) _resp).intValue();
+                return (services.DashBoardConta) _resp;
             } catch (java.lang.Exception _exception) {
-                return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+                return (services.DashBoardConta) org.apache.axis.utils.JavaUtils.convert(_resp, services.DashBoardConta.class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {

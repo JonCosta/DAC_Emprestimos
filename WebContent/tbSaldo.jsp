@@ -1,5 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.rmi.RemoteException" %>
+<%@ page import="services.*" %>
+<%@ page import="services.DashBoardConta" %>
+<%@ page import="modelo.Transacao" %>
 
+<%
+	//inicializa a variável
+	int idusuario = 0;
+	
+	//Estabelece canal de comunicação com o Sistema 1 para acessar Usuario
+	DashBoardUsuarioDAOProxy proxy1 = new DashBoardUsuarioDAOProxy();
+	
+	DashBoardUsuario u = new DashBoardUsuario("valeria", "123");
+	System.out.println("nomeusuario = "+u.getNomeUsuario());
+	System.out.println("senhausuario = "+u.getSenhaUsuario());
+
+	try {
+		idusuario = proxy1.buscarUsuario(u);
+		System.out.println("Id do usuario = "+idusuario);
+	} catch (RemoteException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	//Estabelece canal de comunicação para acessar conta do Sistema 1 através do idusuario recebido anteriormente (n maneiras, podia ter feito direto)
+	DashBoardContaDAOProxy proxy2 = new DashBoardContaDAOProxy();
+	
+	//DashBoardConta quem vai receber o objeto Conta vindo do Sistema 1
+	DashBoardConta dashBoardConta = proxy2.buscarContaUsuario(idusuario);
+	
+	
+	
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 <head>
@@ -29,10 +61,10 @@
 		</tr>
 		<tr>
 			<td>
-				134,23
+				<%= dashBoardConta.getSaldo() %>
 			</td>
 			<td>
-				50,00
+				<%= dashBoardConta.getLimite() %>
 			</td>
 			
 		</tr>

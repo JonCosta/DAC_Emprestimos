@@ -44,7 +44,7 @@ public class DashBoardUsuarioDAOProxy implements services.DashBoardUsuarioDAO {
     return dashBoardUsuarioDAO;
   }
   
-  public int buscarUsuario(modelo.DashBoardUsuario u) throws java.rmi.RemoteException{
+  public int buscarUsuario(services.DashBoardUsuario u) throws java.rmi.RemoteException{
     if (dashBoardUsuarioDAO == null)
       _initDashBoardUsuarioDAOProxy();
     return dashBoardUsuarioDAO.buscarUsuario(u);

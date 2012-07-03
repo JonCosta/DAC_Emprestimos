@@ -3,7 +3,6 @@ import java.rmi.RemoteException;
 
 
 import services.*;
-import modelo.DashBoardUsuario;
 import modelo.Transacao;
 
 public class Client {
