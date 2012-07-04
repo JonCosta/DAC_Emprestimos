@@ -37,40 +37,34 @@
 <head>
 	<title>Consulta de Saldo</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="author" content="Assemblesoft">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<link rel="stylesheet" type="text/css" href="css/screen.css">
+	<link rel="stylesheet" type="text/css" href="css/dropdown.css">
 
+	<script type="text/javascript" src="js/helpers.js"></script>
+	<script type="text/javascript" src="js/date.js"></script>
+	<script type="text/javascript" src="js/form.js"></script>
 </head>
 <body>
 
 	<h2></h2>
-	
-		<p>Consulta de saldo</p>
-
 			
 	<br>
-	
-
-		<table border="1" width="">
-		<tr>
-			<th>
-				Disponível (+)
-			</th>
-			<th>
-				Limite (-)
-			</th>
-			
-		</tr>
-		<tr>
-			<td>
-				<%= dashBoardConta.getSaldo() %>
-			</td>
-			<td>
-				<%= dashBoardConta.getLimite() %>
-			</td>
-			
-		</tr>
-		</table>
+	<form>
+	<fieldset>
+		<legend>Consulta de Saldo</legend>
+			<div>
+				<label for="disponivel">Disponível:</label> <input type="text" id="disponivel" name="disponivel" value="<%= dashBoardConta.getSaldo() %>" readonly/>
+		</div>
+			<div>
+				<label for="Limite">Limite:</label> <input type="text" id="limite" name="limite" value="<%= dashBoardConta.getLimite() %>" readonly/>
+		</div>
+	</fieldset>
 		
-	
+	</form>
 </body>
 </html>
 
