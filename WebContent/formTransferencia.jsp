@@ -50,7 +50,17 @@
 	<script type="text/javascript" src="js/form.js"></script>
 </head>
 <body>
-
+<%  
+	//Processamento da msg de erro ao tentar efetuar login
+	String msg = request.getParameter("msg");
+	String msgOut ="";
+	if (msg!=null){
+		if(msg.equals("1")){
+			msgOut="Campos de login e senha devem ser preenchidos!";
+		} else if (msg.equals("2")){
+			msgOut = "Login e/ou senha inválidos!";
+		}
+}%>
 
 <form action="transfere_saldo.jsp" method="post">
 	<fieldset>
@@ -63,13 +73,21 @@
 	<fieldset>
 			<legend>Conta Crédito</legend>
 			<div>
-				<label for="contadebito">Conta crédito:</label> <input type="text" id="contadebito" name="contadebito" value="${param.numeroconta }" />
+				<label for="contacredito">Conta crédito:</label> <input type="text" id="contacredito" name="contacredito" value="${param.numeroconta }" />
 			</div>
 			<div>
 				<label for="contadebito">Valor da transferência:</label> <input type="text" id="valorcredito" name="valorcredito" value="${param.valorcredito }" />
 			</div>
+			<div>
+				<font color="red"><%= msgOut %></font>
+			</div>
 			
 	</fieldset>
+
+	<div>
+		<p align="right"><input type="reset" value="Limpar"/></p>
+	</div>
+	<br>
 	<div>
 		<p align="right"><input type="submit" value="Transferir >"/></p>
 	</div>

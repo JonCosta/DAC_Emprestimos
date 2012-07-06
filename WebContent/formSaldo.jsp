@@ -22,6 +22,7 @@
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	//registra id na session
 	
 	//Estabelece canal de comunicação para acessar conta do Sistema 1 através do idusuario recebido anteriormente (n maneiras, podia ter feito direto)
 	DashBoardContaDAOProxy proxy2 = new DashBoardContaDAOProxy();
