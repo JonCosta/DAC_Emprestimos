@@ -1,26 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
-<%  
-	//Processamento da msg de erro ao tentar efetuar login
-	String msg = request.getParameter("msg");
-	String msgOut ="";
-	String msgOutSucesso1 ="";
-	if (msg!=null){
-		//Login do usuario
-		if(msg.equals("1")){
-			msgOut="Login e/ou senha inválidos!";
-		//login administrador
-		} else if (msg.equals("2")){
-			msgOut = "Login e/ou senha inválidos!";
-		} else {
-			//session.getAtribute("login");
-			msgOutSucesso1 = "Você efetuou login como "+session.getAttribute("login");
-		}
-}%>
+
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Banco TADS</title>
+<title>Cadastro de Funcionários</title>
 <meta name="description" content="website description">
 <meta name="keywords" content="website keywords, website keywords">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
@@ -32,6 +16,14 @@ body,td,th {
 	color: #CCCCCC;
 }
 </style>
+	<script type='text/javascript'>
+	function confirma(){
+				if (confirm('Tem certeza de que deseja excluir esse Cliente?'))
+					document.form.submit;		
+				else
+					return false;
+	}
+	</script>
 </head>
 <body>
   <div id="main">
@@ -54,15 +46,7 @@ body,td,th {
           </tr>
 
           </table>
-          <b> <font color="red"><%= msgOut %></font></b>
-          <% 
-        		String loginsessao = (String)session.getAttribute("login");
-        		if (msgOutSucesso1 != null){
-        			%><b><font color="#FFB90F"><%= msgOutSucesso1 %></font></b><a href="logoff.jsp">Sair</a><% 
-        		}
-        	
-        %>
-         
+          
          
 		
 		</form>
@@ -85,14 +69,24 @@ body,td,th {
             
 </li>
           <li><a href="sobre.php">Sobre</a></li>
-        </ul></nav></header><div id="site_content">
+        </ul></nav></header>
+        <% String msgLogon = "Você efetuou login como "+session.getAttribute("login")+" - Area Restrita"; %>
+         <b> <font color="#FFB90F"><%= msgLogon %></font></b>
+         
+        <div id="site_content">
+        
       <div id="sidebar_container">
         <div class="sidebar">
           <h3>Área restrita</h3>
           <div class="sidebar_item">
 
-             <jsp:include page="formEntrarAreaRestrita.jsp" flush="true"/> 
-             
+             <ul>
+<li><a href="listaSolicitacoes.jsp">Novos Clientes</a></li>
+              <li><a href="listaClientes.jsp">Cadastro de cliente</a></li>
+              <li><a href="listaFuncionarios.jsp">Cadastro de Funcionario</a></li>	
+              <li><a href="#">An&aacute;lise</a></li>
+              
+            </ul> 
           </div>
           <div class="sidebar_base"></div>
         </div>
@@ -109,31 +103,90 @@ body,td,th {
         </div>
         
       </div>
+      
       <div class="content">
-        <h1>BEM VINDO AO BANCO TADS</h1>
+        <h1>Cadastro de FUncionários</h1>
         <div class="content_item">
-          <p>O Banco TADS &eacute; um banco f&iacute;cticio apresentado &agrave; disciplna de   Desenvolvimento de Aplica&ccedil;&otilde;es Corporativas da Universidade Federal do   Paran&aacute; sob orienta&ccedil;&atilde;o do prof. Razer. Foi desenvolvido com base nos   conceitos de integra&ccedil;&atilde;o de sistemas que utilizam bancos de dados   diferentes e trocam informa&ccedil;&otilde;es entre si.</p>
-          <p>Este sistema foi desenvolvido por Jonathan Costa e Val&eacute;ria Pedro.<strong></strong></p>
+          <table>
+			<tr>
+				<td>
+					<form action="">
+						<input type="text" size='50' name="parambusca"/>
+						<input type="submit" value="Buscar"/>
+					</form>
+				</td>
+				<td align="right">
+					<form action="formFuncionario.jsp"><input type="submit" value ="Novo cadastro"/></form>
+				</td>
+			</tr>
+		</table>
+		
+	<br>
+
+		<table border="1">
+		<tr>
+			<th>
+				Nome
+			</th>
+			<th>
+				CPF
+			</th>
+			<th>
+				Tipo de Doc.
+			</th>
+			<th>
+				Núm. de Doc.
+			</th>
+			<th>
+				Telefone
+			</th>
+			<th>
+				Sexo
+			</th>
+			<th>
+				Data de Nasc.
+			</th>
+			<th>
+				Estado Civil
+			</th>
+			<th>
+				Cargo
+			</th>
+			<th>
+				Departamento
+			</th>
+			<th>
+				Editar
+			</th>
+			<th>
+				Excluir
+			</th>
+		</tr>
+		
+		<%@ page import="dao.UsuarioDAO" %>
+		
+		<%
+			
+			UsuarioDAO dao = new UsuarioDAO() ; //Gera um objeto para as operações do BD de usuário
+			String tabela = dao.listarFuncionarios() ; //Recebe um String com a lista de usuários em formato e tabela
+		
+		%>
+		
+		<tr>
+			<%=tabela %>
+		</tr>
+		</table>
         </div>
       </div>
-      <div class="content">
-        <h1>Ferramentas utilizadas</h1>
-        <div class="content_item">
-          <p>This template has been tested in the following browsers:</p>
-          <ul>
-<li>HTML/CSS/JAVASCRIPT.</li>
-            <li>Java Web.</li>
-            <li>Web Services.</li>
-            <li>Banco de dados MySQL.</li>
-          </ul>
-</div>
+      
       </div>
     </div>
+    
     <footer>
       <p><a href="index.jsp">Home</a> | <a href="examples.html">ABRIR CONTA</a> | <a href="page.html">CONTA E SERVI&Ccedil;OS</a> | <a href="another_page.html">EMPR&Eacute;STIMOS</a> | <a href="contact.php">PAGAMENTOS</a></p>
       <p>Copyright &copy; BANCO TADS | Jonathan costa/val&eacute;ria pedro</p>
     </footer>
-</div>
+
   <!-- javascript at the bottom for fast page loading -->
   <script type="text/javascript" src="js/jquery.js"></script><script type="text/javascript" src="js/jquery.easing-sooper.js"></script><script type="text/javascript" src="js/jquery.sooperfish.js"></script><script type="text/javascript">
     $(document).ready(function() {

@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-
+<%@ page language="java" import="java.util.*"%>
+<%@page import="modelo.Usuario"%>
+<%@page import="dao.UsuarioDAO"%>
 <%  
-	//Processamento da msg de erro ao tentar efetuar login
+	//Processamento das possiveis msgs ao tentar efetuar login
 	String msg = request.getParameter("msg");
 	String msgOut ="";
 	String msgOutSucesso1 ="";
@@ -21,10 +23,12 @@
 <html>
 <head>
 <title>Banco TADS</title>
+<head>
 <meta name="description" content="website description">
 <meta name="keywords" content="website keywords, website keywords">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" id="theme" href="css/style.css">
+
 <!-- modernizr enables HTML5 elements and feature detects --><script type="text/javascript" src="js/modernizr-1.5.min.js"></script>
 <style type="text/css">
 body,td,th {
@@ -32,6 +36,22 @@ body,td,th {
 	color: #CCCCCC;
 }
 </style>
+
+	<script type="text/javascript" src="http://cidades-estados-js.googlecode.com/files/cidades-estados-1.2-utf8.js"></script>
+	<script type="text/javascript" src="js/helpers.js"></script>
+	<script type="text/javascript" src="js/date.js"></script>
+	<script type="text/javascript" src="js/form.js"></script>
+
+	
+	<script type="text/javascript">
+	window.onload = function() {
+	  new dgCidadesEstados({
+	    estado: document.getElementById('estado'),
+	    cidade: document.getElementById('cidade')
+	  });
+	}
+	</script>
+
 </head>
 <body>
   <div id="main">
@@ -41,32 +61,27 @@ body,td,th {
           <h1><a href="index.jsp">Banco<span class="logo_colour">TADS</span></a></h1>
           <h2>2012</h2>
         </div>
-        
-        
-        <form method="post" action="login.jsp" id="search">
+        <form method="post" action="#" id="search">
           <table>
           <tr align="center"><td colspan="4" >Já é cliente?! Acesse já sua conta!</td></tr>
           <tr><td>
-				<label>Login:</label></td>
-				<td><input type="text" name="loginusuario" id="loginusuario" size="7"/></td>
+				<label>Conta corrente n°:</label></td>
+				<td><input type="text" name="numconta" id="numconta" size="7"/></td>
 				<td><label>Senha:</label><input type="password" name="senhausuario" id="senhausuario" size="7"/></td>
 		  <td><input type="submit" value="Ok"></td>
           </tr>
-
           </table>
-          <b> <font color="red"><%= msgOut %></font></b>
-          <% 
+
+         
+         <b> <font color="red"><%= msgOut %></font></b>
+         <% 
         		String loginsessao = (String)session.getAttribute("login");
         		if (msgOutSucesso1 != null){
         			%><b><font color="#FFB90F"><%= msgOutSucesso1 %></font></b><a href="logoff.jsp">Sair</a><% 
         		}
         	
         %>
-         
-         
-		
 		</form>
-		
       </div>
       <nav><ul class="sf-menu" id="nav">
 <li class="current"><a href="index.jsp">Home</a></li>
@@ -91,8 +106,17 @@ body,td,th {
           <h3>Área restrita</h3>
           <div class="sidebar_item">
 
-             <jsp:include page="formEntrarAreaRestrita.jsp" flush="true"/> 
-             
+            <form action="#" method="post">
+            <table><tr>
+				<td>Login:</td><td><input type="text" name="loginfunc" id="loginfunc"/></td></tr>
+				<tr><td>Senha:</td><td><input type="password" name="senhafunc" id="senhafunc"/></td><tr>
+				<tr align="center">
+				  <td colspan="2" >   <input type="submit" value="Entrar">
+                <font color="#FF0000">Mensagem de erro</font></td></tr>
+
+            </table>  
+			</form> 
+			
           </div>
           <div class="sidebar_base"></div>
         </div>
@@ -110,25 +134,14 @@ body,td,th {
         
       </div>
       <div class="content">
-        <h1>BEM VINDO AO BANCO TADS</h1>
+        <h1>Solicita&ccedil;&atilde;o de abertura de conta</h1>
         <div class="content_item">
-          <p>O Banco TADS &eacute; um banco f&iacute;cticio apresentado &agrave; disciplna de   Desenvolvimento de Aplica&ccedil;&otilde;es Corporativas da Universidade Federal do   Paran&aacute; sob orienta&ccedil;&atilde;o do prof. Razer. Foi desenvolvido com base nos   conceitos de integra&ccedil;&atilde;o de sistemas que utilizam bancos de dados   diferentes e trocam informa&ccedil;&otilde;es entre si.</p>
-          <p>Este sistema foi desenvolvido por Jonathan Costa e Val&eacute;ria Pedro.<strong></strong></p>
+         
+         <jsp:include page="formClienteUsuario.jsp" flush="true"/>
+         
+		</div>
+      </div>
         </div>
-      </div>
-      <div class="content">
-        <h1>Ferramentas utilizadas</h1>
-        <div class="content_item">
-          <p>This template has been tested in the following browsers:</p>
-          <ul>
-<li>HTML/CSS/JAVASCRIPT.</li>
-            <li>Java Web.</li>
-            <li>Web Services.</li>
-            <li>Banco de dados MySQL.</li>
-          </ul>
-</div>
-      </div>
-    </div>
     <footer>
       <p><a href="index.jsp">Home</a> | <a href="examples.html">ABRIR CONTA</a> | <a href="page.html">CONTA E SERVI&Ccedil;OS</a> | <a href="another_page.html">EMPR&Eacute;STIMOS</a> | <a href="contact.php">PAGAMENTOS</a></p>
       <p>Copyright &copy; BANCO TADS | Jonathan costa/val&eacute;ria pedro</p>
@@ -142,8 +155,4 @@ body,td,th {
   </script>
 </body>
 </html>
-
-
-
-
 
